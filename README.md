@@ -49,14 +49,16 @@ sudo apt install cmake build-essential python3-dev
 
 ---
 
-## 🧩 Step 1: Clone pybind11
-
-From the root of this project, run:
+## Step 1: Clone Repository with Submodules
+Clone the repo including the pybind11 submodule by running:
 
 ```bash
-git clone https://github.com/pybind/pybind11.git
+git clone --recurse-submodules https://github.com/yourusername/vol_trading_system.git
 ```
-
+If you already cloned without --recurse-submodules, initialize submodules with:
+```bash
+git submodule update --init --recursive
+```
 ---
 
 ## 🏗️ Step 2: Build the Extension
