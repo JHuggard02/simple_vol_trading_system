@@ -1,0 +1,25 @@
+# Build directories and compiled files
+/build/
+/CMakeFiles/
+/cmake_install.cmake
+/Makefile
+/pricer*.so
+/pricer*.pyd
+
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Python virtual environment folders
+venv/
+env/
+
+# IDE/editor folders and files
+.vscode/
+*.swp
+*.swo
+*.idea/
+
+# macOS system files
+.DS_Store
