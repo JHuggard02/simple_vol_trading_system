@@ -1,6 +1,8 @@
 #include <pybind11/pybind11.h>
-#include "../cpp/option_pricer.hpp"
+#include "../cpp/pricing/option_pricer.hpp"
 
+void bind_stochastic_model(pybind11::module_ &);
+void bind_black_scholes(pybind11::module_ &);
 namespace py = pybind11;
 
 PYBIND11_MODULE(pricer, m) {
@@ -34,4 +36,11 @@ PYBIND11_MODULE(pricer, m) {
     m.def("rho", &OptionPricer::rho, "Compute rho of an option",
         py::arg("S"), py::arg("K"), py::arg("T"),
         py::arg("r"), py::arg("sigma"), py::arg("isCall"));
+
+    m.def("iv", &OptionPricer::IV, "Compute Implied Volatility of an option",
+        py::arg("S"), py::arg("K"), py::arg("T"),
+        py::arg("r"), py::arg("initial_sigma"), py::arg("isCall"), py::arg("marketPrice"));
+
+    bind_stochastic_model(m);
+    bind_black_scholes(m);
 }

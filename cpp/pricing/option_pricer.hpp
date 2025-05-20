@@ -10,4 +10,6 @@ public:
     static double vega(double S, double K, double T, double r, double sigma);
     static double gamma(double S, double K, double T, double r, double sigma);
     static double rho(double S, double K, double T, double r, double sigma, bool isCall);
+
+    static double IV(double S, double K, double T, double r, double initial_sigma, bool isCall, double marketPrice);
 };

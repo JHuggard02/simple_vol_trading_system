@@ -9,7 +9,7 @@ double MonteCarloPricer::price_option(double S0, double K, double T, double r, b
     double payoff_sum = 0.0;
 
     for (int i = 0; i < num_paths_; ++i){
-        std::vector<double> path = model_.generate_path(S0, T, steps_);
+        std::vector<double> path = model_.generate_path(T, steps_);
         double ST = path.back();
 
         double payoff = isCall ? std::max(ST - K, 0.0) : std::max(K - ST, 0.0);

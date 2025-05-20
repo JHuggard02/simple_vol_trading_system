@@ -48,3 +48,28 @@ double OptionPricer::rho(double S, double K, double T, double r, double sigma, b
     else
         return -K * T * std::exp(-r * T) * OptionPricer::norm_cdf(-d2);
 }
+
+double OptionPricer::IV(double S, double K, double T, double r, double initial_sigma, bool isCall, double marketPrice) {
+    const double tol = 1e-6;
+    const int max_iter = 100;
+    double sigma = initial_sigma;
+    
+    for (int i = 0; i < max_iter; ++i) {
+        double price = OptionPricer::black_scholes_price(S, K, T, r, sigma, isCall);
+        double vega = OptionPricer::vega(S, K, T, r, sigma);
+
+        if (vega < 1e-8) 
+            break;
+
+        double diff = price - marketPrice;
+        if (std::abs(diff) < tol)
+            return sigma;
+
+        sigma -= diff / vega;
+
+        if (sigma <= 0.0) sigma = 1e-4;
+        if (sigma > 5.0) sigma = 5.0;
+    }
+
+    return sigma;  
+}
